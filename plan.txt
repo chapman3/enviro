@@ -1,0 +1,39 @@
+classes:
+	course
+		attr:
+			-title				|	string
+			-minGrade			|	float
+			-maxGrade			|	float
+			-categoryObjects	|	array of category elems
+		func:
+			+calcMinGrade()		|	calculate amount of course grade earned
+			+calcMaxGrade()		|	calculate amount of course grade lost
+			+addCategory()		|	add a new category to course
+			+remCategory(title) |	completely remove a category by title
+	category
+		attr:
+			-title				|	string
+			-weight				|	float
+			-lost				|	float
+			-earned				|	float
+			-assignments		|	array of assingment elems
+		func:
+			+calcLost()			|	calculate amount of category lost
+			+calcEarned()		|	calculate amount of category earned
+			+addAssignment()	|	add a new assignment to category
+			+removeAssignment()	|	remove an assignment by title
+			+setWeight()		|	set new weight attribute for category
+			+getWeight()		|	get weight attribute for category
+	assignment
+		attr:
+			-title				|	string
+			-ptsPossible		|	float
+			-ptsEarned			|	float
+			-completed			|	boolean
+		func:
+			+setPtsEarned(float)|	set amount of pts earned by amount
+			+getGrade()			|	get grade of assignment based on earned/possible
+
+main:
+	functions:
+	
