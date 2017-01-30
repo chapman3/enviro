@@ -1,3 +1,12 @@
+
+
+
+Goal: 
+	A program to track courses, allowing a user to track grade progress
+	Use a sqlite db to track attributes
+
+
+
 classes:
 	course
 		attr:
@@ -6,8 +15,10 @@ classes:
 			-maxGrade			|	float
 			-categoryObjects	|	array of category elems
 		func:
-			+calcMinGrade()		|	calculate amount of course grade earned
-			+calcMaxGrade()		|	calculate amount of course grade lost
+			+calcMinGrade()		|	calculate amount of course grade earned, set to db
+			+getMinGrade()		|	get minGrade from db
+			+calcMaxGrade()		|	calculate amount of course grade lost, set to db
+			+getMaxGrade()		|	get maxGrade from db
 			+addCategory()		|	add a new category to course
 			+remCategory(title) |	completely remove a category by title
 	category
@@ -36,4 +47,9 @@ classes:
 
 main:
 	functions:
-	
+		+addCourse()			|	creates a new course
+		+remCourse(title)		|	removes a course by title
+		+inquire()				|	shows current courses
+		+selectCourse()			|	opens up a courses attributes to be edited or reviewed
+
+

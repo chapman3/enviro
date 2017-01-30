@@ -1,3 +1,3 @@
 # enviro
 enviro grade calculator
-built to familirize self with ruby further
+built to familiarize self with ruby further
