@@ -1,4 +1,7 @@
+
 require 'sqlite3'
+
+#create tables and references
 
 db = SQLite3::Database.open("enviro.db")
 db.execute( "CREATE TABLE IF NOT EXISTS courses(
