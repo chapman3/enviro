@@ -1,8 +1,10 @@
+require './assignment'
+
 class Category
 
-	def initialize(title, id, weight, lost, earned, aTable)
+	def initialize(title, id, weight, lost, earned)
 		#connectdb
-		db = aTable
+		db = SQLite3::Database.open("enviro.db")
 	
 		#set properties
 		@title = title
@@ -11,11 +13,20 @@ class Category
 		@lost = lost
 		@earned = earned
 		@assignments = []
+
 		#populate with assignment objects
-		#for row in db,
-		#  get info of an assignment
-		#  create assignment object
-		#  add object to assignments array
+		db.results_as_hash = true
+		statement = db.prepare "SELECT * FROM assignments WHERE categoryID=?"
+		statement.bind_param 1, @id
+		results = statement.execute
+		results.each do |row|
+			tempTitle = row['title'] 
+			tempId = row['assignmentID']
+			tempPossible = row['possible']
+			tempEarned = row['earned']
+			tempStatus = row['completed']
+			tempObj = assignment(tempTitle, tempId, tempPossible, tempEarned, tempStatus)
+			@assignments << tempObj
 	end
 
 	#getters

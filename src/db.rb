@@ -21,6 +21,6 @@ db.execute( "CREATE TABLE IF NOT EXISTS assignments(
 												ptsPossible REAL, 
 												ptsEarned REAL, 
 												completed INTEGER,  
-												assignmentID INTEGER,
+												assignmentID INTEGER UNIQUE,
 												categoryID INTEGER, FOREIGN KEY(categoryID) REFERENCES categories(categoryID),
 												CHECK (completed IN (0, 1)))")
