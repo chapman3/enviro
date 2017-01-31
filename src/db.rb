@@ -9,7 +9,7 @@ db.execute( "CREATE TABLE IF NOT EXISTS courses(
 												minGrade REAL, 
 												maxGrade REAL, 
 												courseID INTEGER UNIQUE)")
-db.execute( "CREATE TABLE IF NOT EXISTS categorys(
+db.execute( "CREATE TABLE IF NOT EXISTS categories(
 												title TEXT, 
 												weight REAL, 
 												lost REAL, 
@@ -20,5 +20,7 @@ db.execute( "CREATE TABLE IF NOT EXISTS assignments(
 												title TEXT, 
 												ptsPossible REAL, 
 												ptsEarned REAL, 
-												completed INTEGER, CHECK (completed IN (0, 1)), 
-												categoryID INTEGER, FOREIGN KEY(categoryID) REFERENCES categorys(categoryID))")
+												completed INTEGER,  
+												assignmentID INTEGER,
+												categoryID INTEGER, FOREIGN KEY(categoryID) REFERENCES categories(categoryID),
+												CHECK (completed IN (0, 1)))")
