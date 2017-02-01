@@ -1,4 +1,5 @@
 require './assignment'
+require 'sqlite3'
 
 class Category
 
@@ -19,14 +20,17 @@ class Category
 		statement = db.prepare "SELECT * FROM assignments WHERE categoryID=?"
 		statement.bind_param 1, @id
 		results = statement.execute
-		results.each do |row|
-			tempTitle = row['title'] 
-			tempId = row['assignmentID']
-			tempPossible = row['possible']
-			tempEarned = row['earned']
-			tempStatus = row['status']
-			tempObj = assignment(tempTitle, tempId, tempPossible, tempEarned, tempStatus)
-			@assignments << tempObj
+		unless results.count == 0
+			results.each do |row|
+				tempTitle = row['title'] 
+				tempId = row['assignmentID']
+				tempPossible = row['possible']
+				tempEarned = row['earned']
+				tempStatus = row['status']
+				tempObj = assignment(tempTitle, tempId, tempPossible, tempEarned, tempStatus)
+				@assignments << tempObj
+			end
+		end
 	end
 
 	#getters
@@ -68,6 +72,4 @@ class Category
 		#delete db info
 		#delete obj.
 	end
-end
-
 end

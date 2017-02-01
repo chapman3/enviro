@@ -23,4 +23,4 @@ db.execute( "CREATE TABLE IF NOT EXISTS assignments(
 												status INTEGER,  
 												assignmentID INTEGER UNIQUE,
 												categoryID INTEGER, FOREIGN KEY(categoryID) REFERENCES categories(categoryID),
-												CHECK (completed IN (0, 1)))")
+												CHECK (status IN (0, 1)))")

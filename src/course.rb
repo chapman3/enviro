@@ -1,4 +1,5 @@
 require './category'
+require 'sqlite3'
 
 class Course
 
@@ -18,20 +19,22 @@ class Course
 		statement = db.prepare "SELECT * FROM categories WHERE courseID=?"
 		statement.bind_param 1, @id
 		results = statement.execute
-		results.each do |row|
-			tempTitle = row['title']
-			tempWeight = row['weight']
-			tempLost = row['lost']
-			tempEarned = row['earned']
-			tempId = row['categoryID']
-			tempObj = category(tempTitle, tempId, tempWeight, tempLost, tempEarned)
-			@categories << tempObj
+		unless results.count == 0
+			results.each do |row|
+				tempTitle = row['title']
+				tempWeight = row['weight']
+				tempLost = row['lost']
+				tempEarned = row['earned']
+				tempId = row['categoryID']
+				tempObj = category(tempTitle, tempId, tempWeight, tempLost, tempEarned)
+				@categories << tempObj
+			end
 		end
+	end
 		#for row in db,
 		#  get info of a category
 		#  create category object
 		#  add object to category array
-	end
 
 	#getters
 	def title
@@ -61,7 +64,7 @@ class Course
 	end
 	def addCategory
 		catId = getCatId + @categories.count + 1
-		
+
 		#prompt for properties
 		#assign new catobj
 		#append to @categories
