@@ -18,9 +18,9 @@ db.execute( "CREATE TABLE IF NOT EXISTS categories(
 												courseID INTEGER, FOREIGN KEY(courseID) REFERENCES courses(courseID))")
 db.execute( "CREATE TABLE IF NOT EXISTS assignments(
 												title TEXT, 
-												ptsPossible REAL, 
-												ptsEarned REAL, 
-												completed INTEGER,  
+												possible REAL, 
+												earned REAL, 
+												status INTEGER,  
 												assignmentID INTEGER UNIQUE,
 												categoryID INTEGER, FOREIGN KEY(categoryID) REFERENCES categories(categoryID),
 												CHECK (completed IN (0, 1)))")

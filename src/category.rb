@@ -24,7 +24,7 @@ class Category
 			tempId = row['assignmentID']
 			tempPossible = row['possible']
 			tempEarned = row['earned']
-			tempStatus = row['completed']
+			tempStatus = row['status']
 			tempObj = assignment(tempTitle, tempId, tempPossible, tempEarned, tempStatus)
 			@assignments << tempObj
 	end
@@ -55,5 +55,19 @@ class Category
 	end
 	def weight=(value)
 		@weight = value
+	end
+
+	#class methods
+	def addAssignment
+		#prompt for title, ptsPossible, ptsEarned, status
+		#assign new catobj
+		#append to @categories
+	end
+	def remAssignment(title)
+		#find in @categories
+		#delete db info
+		#delete obj.
+	end
+end
 
 end

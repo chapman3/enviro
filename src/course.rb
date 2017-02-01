@@ -60,6 +60,8 @@ class Course
 		return (100*@id)
 	end
 	def addCategory
+		catId = getCatId + @categories.count + 1
+		
 		#prompt for properties
 		#assign new catobj
 		#append to @categories

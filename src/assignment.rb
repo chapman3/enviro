@@ -6,7 +6,7 @@ class Assignment
 		@id = id
 		@ptsPossible = possible
 		@ptsEarned = earned
-		@completed = status
+		@status = status
 	end
 
 	#getters
@@ -22,8 +22,8 @@ class Assignment
 	def ptsEarned
 		@ptsEarned
 	end
-	def completed
-		@completed
+	def status
+		@status
 	end
 
 	#setters
@@ -36,8 +36,8 @@ class Assignment
 	def ptsEarned=(value)
 		@ptsEarned = value
 	end
-	def completed(value)
-		@completed = value
+	def status=(value)
+		@status = value
 	end
 
 end
