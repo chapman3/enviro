@@ -8,8 +8,8 @@ class Course
 		#set properties
 		@title = title
 		@id = id
-		@minGrade = minGrade
-		@maxGrade = maxGrade
+		@minGrade = minGrade.to_f
+		@maxGrade = maxGrade.to_f
 		@categories = []
 
 		@db = SQLite3::Database.open("enviro.db")

@@ -9,9 +9,9 @@ class Category
 		@title = title
 		@id = id
 		@courseId = courseId
-		@weight = weight
-		@lost = lost
-		@earned = earned
+		@weight = weight.to_f
+		@lost = lost.to_f
+		@earned = earned.to_f
 		@assignments = []
 
 		@db = SQLite3::Database.open("enviro.db")
@@ -89,20 +89,28 @@ class Category
 		end
 	end
 	def calcLostEarned
+		puts "made it to calcLostEarned"
 		totalPossible = 0
 		earnedPossible = 0
 		totalEarned = 0
+		puts @assignments.count
 		@assignments.each do |assignment|
+			puts assignment.status.class
 			if assignment.status == 0
+				puts "am I in 0?"
 				totalPossible += assignment.ptsPossible
 			elsif assignment.status == 1
+				puts "am I in 1?"
 				totalPossible += assignment.ptsPossible
 				earnedPossible += assignment.ptsPossible
 				totalEarned += assignment.ptsEarned
 			else
+				puts "oops how did this happen?"
 				return 0
 			end
 		end
+		puts "totalPossible"
+		puts totalPossible
 		unless totalPossible == 0
 			wtPossible = (earnedPossible / totalPossible) * @weight
 			@earned = totalEarned / wtPossible

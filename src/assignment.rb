@@ -6,9 +6,9 @@ class Assignment
 		@title = title
 		@id = id
 		@catId = catId
-		@ptsPossible = possible
-		@ptsEarned = earned
-		@status = status
+		@ptsPossible = possible.to_f
+		@ptsEarned = earned.to_f
+		@status = status.to_f
 		puts addToDb
 	end
 
