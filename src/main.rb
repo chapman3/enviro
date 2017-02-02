@@ -1,6 +1,7 @@
 require './course'
 require './category'
 require './assignment'
+require './controller'
 require 'sqlite3'
 
 #assignment test
@@ -13,14 +14,4 @@ puts assignment.ptsEarned
 puts assignment.status
 "
 
-course = Course.new('test', 1, 0, 0, 1)
-course.addCategory
-category = course.categories[0]
-category.addAssignment
-assignment = category.assignments[0]
-puts assignment.ptsEarned
-puts "before"
-puts category.earned
-category.calcLostEarned
-puts "after"
-puts category.earned
+controller = Controller.new
