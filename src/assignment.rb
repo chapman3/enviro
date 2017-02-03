@@ -35,15 +35,19 @@ class Assignment
 	#setters
 	def title=(value)
 		@title = value
+		puts updateDb("title")
 	end
 	def ptsPossible=(value)
 		@ptsPossible = value
+		puts updateDb("possible")
 	end
 	def ptsEarned=(value)
 		@ptsEarned = value
+		puts updateDb("earned")
 	end
 	def status=(value)
 		@status = value
+		puts updateDb("status")
 	end
 
 	#db operations
@@ -64,7 +68,33 @@ class Assignment
 		results = statement.execute
 		return results
 	end
-	def updateDb
-
+	def updateDb(attribute)
+		if attribute == "title"
+			statement = @db.prepare "UPDATE assignments Set title=? WHERE assignmentID=?"
+			statement.bind_param 1, @title
+			statement.bind_param 2, @id
+			results = statement.execute
+			return "Title Update to DB"
+		elsif attribute == "possible"
+			statement = @db.prepare "UPDATE assignments Set possible=? WHERE assignmentID=?"
+			statement.bind_param 1, @ptsPossible
+			statement.bind_param 2, @id
+			results = statement.execute
+			return "ptsPossible Update to DB"
+		elsif attribute == "earned"
+			statement = @db.prepare "UPDATE assignments Set earned=? WHERE assignmentID=?"
+			statement.bind_param 1, @ptsEarned
+			statement.bind_param 2, @id
+			results = statement.execute
+			return "ptsEarned Update to DB"
+		elsif attribute == "status"
+			statement = @db.prepare "UPDATE assignments Set status=? WHERE assignmentID=?"
+			statement.bind_param 1, @status
+			statement.bind_param 2, @id
+			results = statement.execute
+			return "Status Update to DB"
+		else
+			return "Wrong attribute in Assignment.updateDb"
+		end
 	end
 end

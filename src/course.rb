@@ -86,6 +86,52 @@ class Course
 		return 1
 	end
 
+	#category menu methods
+	def inqCategories
+		unless @categories.count == 0 
+			puts "CategoryID - Title - Weight - Lost - Earned"
+			@categories.each do |cat|
+				puts cat.id.to_s << ' - ' << cat.title.to_s << ' - ' << cat.weight.to_s << ' - ' << cat.lost.to_s << ' - ' << cat.earned.to_s
+			end
+			puts "Enter 0 to return to menu"
+			puts "Enter CategoryID to inquire on Category"
+			input = gets.chomp
+			unless input.to_i == 0
+				@categories.each do |cat|
+					if input.to_i == cat.id.to_i
+						return cat.inqAssignments
+					end
+				end
+			end
+			return giveCatOptions	
+		end
+		puts "no categories"
+		return giveCatOptions
+	end
+	def giveCatOptions
+		puts "What would you like to do?"
+		puts "1 - Inquire on Categories"
+		puts "2 - Add a new Category"
+		puts "3 - Remove a Category"
+		puts "4 - Return to Menu"
+		input = gets.chomp
+		handleSelection(input)
+	end
+	def handleSelection(input)
+		if input.to_i == 1
+			inqCategories
+			return giveCatOptions
+		elsif input.to_i == 2
+			addCategory
+			return giveCatOptions
+		elsif input.to_i == 3
+			remCategory
+			return giveCatOptions
+		else
+			puts "Returning to Main Menu"
+		end
+	end
+
 	#db operations
 	def createCategoriesFromDb
 		#populate objects from db
@@ -123,10 +169,27 @@ class Course
 		results = statement.execute
 		return results
 	end
-	def updateDb
-
+	def updateDb(attribute)
+		if attribute == "title"
+			statement = @db.prepare "UPDATE courses Set title=? WHERE CourseID=?"
+			statement.bind_param 1, @title
+			statement.bind_param 2, @id
+			results = statement.execute
+			return "Title Update to DB"
+		elsif attribute == "minGrade"
+			statement = @db.prepare "UPDATE courses Set minGrade=? WHERE CourseID=?"
+			statement.bind_param 1, @minGrade
+			statement.bind_param 2, @id
+			results = statement.execute
+			return "MinGrade Update to DB"
+		elsif attribute == "maxGrade"
+			statement = @db.prepare "UPDATE courses Set maxGrade=? WHERE CourseID=?"
+			statement.bind_param 1, @maxGrade
+			statement.bind_param 2, @id
+			results = statement.execute
+			return "maxGrade Update to DB"
+		else
+			return "Wrong attribute in Course.updateDb"
+		end
 	end
 end
-
-
-

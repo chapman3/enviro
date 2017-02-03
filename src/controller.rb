@@ -8,20 +8,14 @@ class Controller
 	end
 
 	#optionMethods
-	def inqCourses
-		puts "CourseID - Title - MinGrade - MaxGrade"
-		unless @courses.count == 0 
-			@courses.each do |course|
-				puts course.id.to_s << ' - ' << course.title.to_s << ' - ' << course.minGrade.to_s << ' - ' << course.maxGrade.to_s
-			end
-		end
-	end
 	def showTitles
 		unless @courses.count == 0
-			@course.each do |course|
+			@courses.each do |course|
 				puts course.title
 			end
+			return
 		end
+		puts "no courses"
 	end
 	def addCourse
 		coId = @courses.count + 1
@@ -32,9 +26,7 @@ class Controller
 	end
 	def remCourse
 		puts "Which course should we delete?"
-		@courses.each do |course|
-			puts course.title
-		end
+		showTitles
 		input = gets.chomp
 		@courses.each do |course|
 			if course.title = input
@@ -49,6 +41,25 @@ class Controller
 	end
 
 	#inputMethods
+	def inqCourses
+		unless @courses.count == 0 
+			puts "CourseID - Title - MinGrade - MaxGrade"
+			@courses.each do |course|
+				puts course.id.to_s << ' - ' << course.title.to_s << ' - ' << course.minGrade.to_s << ' - ' << course.maxGrade.to_s
+			end
+			puts "Enter 0 to return to menu"
+			puts "Enter CourseID to inquire on Course"
+			input = gets.chomp
+			unless input.to_i == 0
+				@courses.each do |course|
+					if input.to_i == course.id.to_i
+						return course.inqCategories
+					end
+				end
+			end	
+		end
+		puts "no courses"
+	end
 	def giveOptions
 		puts "What would you like to do?"
 		puts "1 - Inquire on Courses"
@@ -72,7 +83,6 @@ class Controller
 			exit(true)
 		else
 			puts "Yikes"
-			#dontdoanything
 		end
 	end
 end
