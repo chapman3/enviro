@@ -38,11 +38,11 @@ class Assignment
 		puts updateDb("title")
 	end
 	def ptsPossible=(value)
-		@ptsPossible = value
+		@ptsPossible = value.to_f
 		puts updateDb("possible")
 	end
 	def ptsEarned=(value)
-		@ptsEarned = value
+		@ptsEarned = value.to_f
 		puts updateDb("earned")
 	end
 	def status=(value)
